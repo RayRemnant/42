@@ -15,7 +15,7 @@
 int	ft_print_percentage_sign(void)
 {
 	ft_putchar_fd('%', 1);
-	return (1);	
+	return (1);
 }
 
 int	check_format(const char *format, va_list args)
