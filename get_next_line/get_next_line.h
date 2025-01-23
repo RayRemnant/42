@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ray <marvin@42.fr>                         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/23 16:58:35 by ray               #+#    #+#             */
+/*   Updated: 2025/01/23 16:58:37 by ray              ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
@@ -5,19 +17,13 @@
 #  define BUFFER_SIZE 3
 # endif
 
-#include <stdarg.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-void	*ft_calloc(size_t nmemb, size_t size);
-char  *get_next_line(int fd);
-int main(void);
-size_t	ft_strlen(const char *s);
-void	*ft_memmove(void *dest, const void *src, size_t n);
-char	*ft_strjoin(char *s1, char const *s2);
-char	*ft_strdup(const char *s);
-char	*ft_substr(char const *s, unsigned int start, size_t n);
-void	ft_bzero(void *s, size_t n);
+char	*get_next_line(int fd);
+char	*update_line(char *s1, char const *s2);
+char	*ft_substr(char const *s, size_t n);
 
 #endif
