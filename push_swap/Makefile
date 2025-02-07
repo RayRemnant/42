@@ -7,7 +7,7 @@ LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Your project files
-SRC = src/push_swap.c src/operations.c src/stack_utils.c src/sorting.c
+SRC = src/push_swap.c src/operations.c src/stack_utils.c src/sorting.c src/chunk_sort.c
 OBJ = $(SRC:.c=.o)
 NAME = push_swap
 

@@ -3,6 +3,17 @@
 #include <string.h>
 #include "../push_swap.h"
 
+// Function to free the stack
+void free_stack(t_node *head)
+{
+    t_node *temp;
+    while (head)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
+}
 
 long	ft_atoi_check(const char *nptr)
 {
@@ -142,18 +153,18 @@ t_node *init_stack(int argc, char **argv)
     {
         if (!process_numbers(argv[i], &last_node))
         {
-            free(dummy);
+			free_stack(dummy);
             return NULL;
         }
         i++;
     }
 
-    t_node *head = dummy->next;
+	t_node *head = dummy->next;
     free(dummy); 
 
-        if (has_duplicates(head)) // Check for duplicates after allocation
+    if (has_duplicates(head)) // Check for duplicates after allocation
     {
-        free_stack(head);
+		free_stack(head);
         return NULL;
     }
 
@@ -168,17 +179,10 @@ void print_stack(t_node *head)
         printf("%d -> ", head->value);
         head = head->next;
     }
+	printf("\n");
     // printf("NULL\n");
 }
 
-// Function to free the stack
-void free_stack(t_node *head)
-{
-    t_node *temp;
-    while (head)
-    {
-        temp = head;
-        head = head->next;
-        free(temp);
-    }
-}
+
+
+
