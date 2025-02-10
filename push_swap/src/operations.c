@@ -1,6 +1,14 @@
 #include "../push_swap.h"
 #include "stdio.h"
-// Swap top two elements of stack A
+
+/* static void add_operation(const char *op){
+	static char	operations_string[SIZE_MAX/2];
+
+	ft_strlcat(operations_string, op, SIZE_MAX);
+
+	printf("%s\n", operations_string);
+} */
+
 static int swap(t_node **stack)
 {
     if (!stack || !(*stack) || !(*stack)->next)
@@ -16,25 +24,9 @@ static int swap(t_node **stack)
 }
 
 
-// Swap top two elements of stack B (same as sa)
-void sb(t_node **stack)
-{
-	if (swap(stack))
-		printf("sb\n");
-}
-
-void sa(t_node **stack)
-{
-	if (swap(stack))
-		printf("sa\n");
-}
-
-// Swap both stacks A and B
-void ss(t_node **a, t_node **b)
-{
-    swap(a);
-    swap(b);
-	printf("ss\n");
+void sx(t_node**stack, char stack_char){
+	if(swap(stack))
+		printf("s%c\n", stack_char);
 }
 
 int push(t_node **dest, t_node **src)
@@ -48,25 +40,16 @@ int push(t_node **dest, t_node **src)
 	return (1);
 }
 
-void pa(t_node **a, t_node **b)
-{
-	if(push(a, b))
-		printf("pa\n");
+void px(t_node **dest, t_node **src, char dest_char){
+	if(push(dest, src))
+		printf("p%c\n", dest_char);
 }
-
-void pb(t_node **b, t_node **a)
-{
-	if(push(b, a))
-		printf("pb\n");
-}
-
-
 
 // Rotate stack A (shift up)
-void rotate(t_node **stack)
+int rotate(t_node **stack)
 {
     if (!stack || !(*stack) || !(*stack)->next)
-        return;
+        return 0;
     t_node *first = *stack;
     t_node *last = *stack;
 
@@ -76,39 +59,19 @@ void rotate(t_node **stack)
     *stack = first->next;
     first->next = NULL;
     last->next = first;
-}
-
-// Rotate stack B (same as ra)
-void rb(t_node **stack)
-{
-    rotate(stack);
-	printf("rb\n");
-}
-
-// Rotate stack B (same as ra)
-void ra(t_node **stack)
-{
-    rotate(stack);
-	printf("ra\n");
+	return (1);
 }
 
 void rx(t_node**stack, char stack_char){
-	rotate(stack);
-	printf("r%c\n", stack_char);
-}
-
-// Rotate both stacks A and B
-void rr(t_node **a, t_node **b)
-{
-    rotate(a);
-    rotate(b);
+	if(rotate(stack))
+		printf("r%c\n", stack_char);
 }
 
 // Reverse rotate stack A (shift down)
-void reverse_rotate(t_node **stack)
+int reverse_rotate(t_node **stack)
 {
     if (!stack || !(*stack) || !(*stack)->next)
-        return;
+        return (0);
     t_node *prev = NULL;
     t_node *last = *stack;
 
@@ -120,30 +83,12 @@ void reverse_rotate(t_node **stack)
     prev->next = NULL;
     last->next = *stack;
     *stack = last;
+	return(1);
 }
 
-// Reverse rotate stack B (same as rra)
-void rrb(t_node **stack)
-{
-    reverse_rotate(stack);
-	printf("rrb\n");
-}
-
-void rra(t_node **stack)
-{
-    reverse_rotate(stack);
-	printf("rra\n");
-}
 
 void rrx(t_node**stack, char stack_char){
-	reverse_rotate(stack);
-	printf("rr%c\n", stack_char);
+	if(reverse_rotate(stack))
+		printf("rr%c\n", stack_char);
 }
 
-// Reverse rotate both stacks A and B
-void rrr(t_node **a, t_node **b)
-{
-    reverse_rotate(a);
-    reverse_rotate(b);
-	printf("rrr\n");
-}

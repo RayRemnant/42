@@ -149,50 +149,50 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 			// printf("moving first...\n");
 			// print_stack(*stack_a);
 			move_to_top(stack_b, first_index, size, 'b');
-			pa(stack_a, stack_b);
+			px(stack_a, stack_b, 'a');
 			size--;
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sa(stack_a);
+				sx(stack_a, 'a');
 			}			second_index = get_index(*stack_b, second);
 			// print_stack(*stack_a);
 			move_to_top(stack_b, second_index, size, 'b');
-			pa(stack_a, stack_b);
+			px(stack_a, stack_b, 'a');
 			size--;
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sa(stack_a);
+				sx(stack_a, 'a');
 			}		}
 		else
 		{
 			// printf("moving second...\n");
 			move_to_top(stack_b, second_index, size, 'b');
-			pa(stack_a, stack_b);
+			px(stack_a, stack_b, 'a');
 			size--;
 			// print_stack(stack_a);
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sa(stack_a);
+				sx(stack_a, 'a');
 			}
 			first_index = get_index(*stack_b, first);
 			// print_stack(*stack_a);
 			move_to_top(stack_b, first_index, size, 'b');
 			// print_stack(*stack_a);
 			
-			pa(stack_a, stack_b);
+			px(stack_a, stack_b, 'a');
 			size--;
 			// print_stack(stack_a);
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sa(stack_a);
+				sx(stack_a, 'a');
 			}		
 		}
 
@@ -238,9 +238,8 @@ void	chunk_sort(t_node **stack_a, t_node **stack_b)
 			if (index > size / 2)
 				index = size - index;
 			move_to_top(stack_a, index, size, 'a');
-			pb(stack_b, stack_a);
+			px(stack_b, stack_a, 'b');
 			size--;
-			//ft_do_pb(stack_a, stack_b);
 			// if (stack_b->stack[0] < stack_a->middle)
 			// 	ft_do_rotate(stack_b, 'b');
 		}
