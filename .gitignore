@@ -1,1 +1,5 @@
 /testers/*
+*.o
+*.out
+traces.txt
+push_swap
