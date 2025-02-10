@@ -12,10 +12,10 @@ typedef struct s_node
 } t_node;
 
 // Stack operations
-void sx(t_node**stack, char stack_char);
-void	px(t_node **dest, t_node **src, char dest_char);
-void 	rx(t_node**stack, char stack_char);
-void	rrx(t_node**stack, char stack_char);
+void 	sx(t_node**stack, char *op);
+void	px(t_node **dest, t_node **src, char *op);
+void 	rx(t_node**stack, char *op);
+void	rrx(t_node**stack, char *op);
 
 // Sorting
 void    sort_stack(t_node **a, t_node **b);
