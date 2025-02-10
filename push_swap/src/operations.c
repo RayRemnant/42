@@ -1,13 +1,21 @@
 #include "../push_swap.h"
 #include "stdio.h"
 
-/* static void add_operation(const char *op){
-	static char	operations_string[SIZE_MAX/2];
+#define OPERATION_STRING_SIZE 1024
 
-	ft_strlcat(operations_string, op, SIZE_MAX);
+static void add_operation(const char *op){
+    static char operations_string[1024] = "";
 
-	printf("%s\n", operations_string);
-} */
+	printf("%s\n", op);
+	return;
+
+    if (ft_strlen(operations_string) + ft_strlen(op) + 1 < 1024) {
+        ft_strlcat(operations_string, op, 1024);
+        printf("%s\n", operations_string);
+    } else {
+        printf("Error: operation string buffer overflow\n");
+    }
+}
 
 static int swap(t_node **stack)
 {
@@ -24,9 +32,9 @@ static int swap(t_node **stack)
 }
 
 
-void sx(t_node**stack, char stack_char){
+void sx(t_node**stack, char *op){
 	if(swap(stack))
-		printf("s%c\n", stack_char);
+		add_operation(op);
 }
 
 int push(t_node **dest, t_node **src)
@@ -40,9 +48,9 @@ int push(t_node **dest, t_node **src)
 	return (1);
 }
 
-void px(t_node **dest, t_node **src, char dest_char){
+void px(t_node **dest, t_node **src, char *op){
 	if(push(dest, src))
-		printf("p%c\n", dest_char);
+		add_operation(op);
 }
 
 // Rotate stack A (shift up)
@@ -62,9 +70,9 @@ int rotate(t_node **stack)
 	return (1);
 }
 
-void rx(t_node**stack, char stack_char){
+void rx(t_node**stack, char *op){
 	if(rotate(stack))
-		printf("r%c\n", stack_char);
+		add_operation(op);
 }
 
 // Reverse rotate stack A (shift down)
@@ -87,8 +95,8 @@ int reverse_rotate(t_node **stack)
 }
 
 
-void rrx(t_node**stack, char stack_char){
+void rrx(t_node**stack, char *op){
 	if(reverse_rotate(stack))
-		printf("rr%c\n", stack_char);
+		add_operation(op);
 }
 
