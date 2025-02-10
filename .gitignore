@@ -1,5 +1,6 @@
 /testers/*
 *.o
 *.out
-traces.txt
-/push_swap
+*.a
+*/traces.txt
+/push_swap/push_swap
