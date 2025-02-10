@@ -40,29 +40,29 @@ void sort_three(t_node **a)
     // Case 1: 3 2 1 (needs swap and reverse rotation)
     if (num1 > num2 && num2 > num3)
     {
-		sx(a, 'a');
-        rrx(a, 'a'); // Reverse rotate: 1 2 3
+		sx(a, "sa");
+        rrx(a, "rra"); // Reverse rotate: 1 2 3
     }
     // Case 2: 3 1 2 (needs rotation)
     else if (num1 > num3 && num3 > num2)
     {
-        rx(a, 'a');  // Rotate: 1 2 3
+        rx(a, "ra");  // Rotate: 1 2 3
     }
     // Case 3: 2 3 1 (needs swap and rotate)
     else if (num2 > num1 && num1 > num3)
     {
-        rrx(a, 'a');  // Swap top two: 3 2 1
+        rrx(a, "rra");  // Swap top two: 3 2 1
     }
     // Case 4: 1 3 2 (needs swap and rotate)
      else if (num2 > num3 && num3 > num1)
     {
-        rrx(a, 'a');
-		sx(a, 'a');
+        rrx(a, "rra");
+		sx(a, "sa");
     }
     // Case 5: 2 1 3 
       else if (num3 > num1 && num1 > num2)
     {
-		sx(a, 'a');
+		sx(a, "sa");
     }
     // Case 4: 1 3 2 (already sorted, no action needed)
     // No action needed as the stack is already sorted in ascending order.
@@ -89,7 +89,7 @@ void sort_stack(t_node **a, t_node **b)
 	}
 
 	if(size == 2){
-		sx(a, 'a');
+		sx(a, "sa");
 		return ;
 	}
 

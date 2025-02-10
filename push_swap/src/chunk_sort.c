@@ -4,19 +4,26 @@
 
 
 static void move_to_top(t_node **stack, int index, int size, char stack_char){
+	char op[4];
+	op[0] = 'r';
 	if (index <= size / 2)
 	{
+		op[1] = stack_char;
+		op[2] = '\0';
 		while (index-- > 0)
 		{
-			rx(stack, stack_char);
+			rx(stack, op);
 		}
 	}
 	else
 	{
 		index = size - index;
+		op[1] = 'r';
+		op[2] = stack_char;
+		op[3] = '\0';
 		while (index-- > 0)
 		{
-			rrx(stack, stack_char);
+			rrx(stack, op);
 		}
 	}
 }
@@ -149,50 +156,50 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 			// printf("moving first...\n");
 			// print_stack(*stack_a);
 			move_to_top(stack_b, first_index, size, 'b');
-			px(stack_a, stack_b, 'a');
+			px(stack_a, stack_b, "pa");
 			size--;
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sx(stack_a, 'a');
+				sx(stack_a, "sa");
 			}			second_index = get_index(*stack_b, second);
 			// print_stack(*stack_a);
 			move_to_top(stack_b, second_index, size, 'b');
-			px(stack_a, stack_b, 'a');
+			px(stack_a, stack_b, "pa");
 			size--;
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sx(stack_a, 'a');
+				sx(stack_a, "sa");
 			}		}
 		else
 		{
 			// printf("moving second...\n");
 			move_to_top(stack_b, second_index, size, 'b');
-			px(stack_a, stack_b, 'a');
+			px(stack_a, stack_b, "pa");
 			size--;
 			// print_stack(stack_a);
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sx(stack_a, 'a');
+				sx(stack_a, "sa");
 			}
 			first_index = get_index(*stack_b, first);
 			// print_stack(*stack_a);
 			move_to_top(stack_b, first_index, size, 'b');
 			// print_stack(*stack_a);
 			
-			px(stack_a, stack_b, 'a');
+			px(stack_a, stack_b, "pa");
 			size--;
 			// print_stack(stack_a);
 			// print_stack(*stack_a);
 			if ((*stack_a)->next && (*stack_a)->value > (*stack_a)->next->value)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
-				sx(stack_a, 'a');
+				sx(stack_a, "sa");
 			}		
 		}
 
@@ -212,6 +219,13 @@ void	chunk_sort(t_node **stack_a, t_node **stack_b)
 	if(size <= 120){
 		chunk_size=18;
 	}
+
+	//clone stack a into stack c
+
+	//while chunk size is less than the size of the stack
+	//reset / empty stack a
+	//fill it with stack c elements
+	//sort it.
 
 	while (*stack_a)
 	{
@@ -238,7 +252,7 @@ void	chunk_sort(t_node **stack_a, t_node **stack_b)
 			if (index > size / 2)
 				index = size - index;
 			move_to_top(stack_a, index, size, 'a');
-			px(stack_b, stack_a, 'b');
+			px(stack_b, stack_a, "pb");
 			size--;
 			// if (stack_b->stack[0] < stack_a->middle)
 			// 	ft_do_rotate(stack_b, 'b');
