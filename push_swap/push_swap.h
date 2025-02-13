@@ -20,14 +20,21 @@ void	rrx(t_node**stack, char *op);
 // Sorting
 void    sort_stack(t_node **a, t_node **b);
 
-// Utils
+long	ft_atoi_check(const char *nptr);
+
+
+// stack check
 int stack_size(t_node *stack);
-t_node  *init_stack(int argc, char **argv);
-void    free_stack(t_node *stack);
+int stack_has_duplicates(t_node *head);
 void    print_stack(t_node *stack);
+int stack_is_sorted(t_node *current);
+
+
+t_node  *init_stack(int argc, char **argv);
+void    *free_stack(t_node *stack);
 void	chunk_sort(t_node **a, t_node **b);
 void duplicate_stack(t_node **dest, t_node *src);
-void add_operation(const char *op);
+void operations_handler(const char *op);
 void sort_three(t_node **a);
 
 // Sorting utils
@@ -37,5 +44,9 @@ int get_index(t_node *current, int n);
 int get_max(t_node *stack);
 int get_next_max(t_node *current, int max);
 int get_next_min(t_node *current, int min);
+
+// sort
+void sort_simple(t_node **a, t_node **b);
+int free_tokens(char **tokens);
 
 #endif
