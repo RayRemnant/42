@@ -26,5 +26,16 @@ t_node  *init_stack(int argc, char **argv);
 void    free_stack(t_node *stack);
 void    print_stack(t_node *stack);
 void	chunk_sort(t_node **a, t_node **b);
+void duplicate_stack(t_node **dest, t_node *src);
+void add_operation(const char *op);
+void sort_three(t_node **a);
+
+// Sorting utils
+int get_min(t_node *stack);
+void move_to_top(t_node **stack, int index, int size, char stack_char);
+int get_index(t_node *current, int n);
+int get_max(t_node *stack);
+int get_next_max(t_node *current, int max);
+int get_next_min(t_node *current, int min);
 
 #endif

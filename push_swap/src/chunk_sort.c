@@ -1,36 +1,27 @@
 #include "../push_swap.h"
 #include <stdio.h>
 
+#include <stdio.h>
 
+double sqrt_manual(int n) {
+    if (n == 0 || n == 1) return n; // Base case
 
-static void move_to_top(t_node **stack, int index, int size, char stack_char){
-	char op[4];
-	op[0] = 'r';
-	if (index <= size / 2)
-	{
-		op[1] = stack_char;
-		op[2] = '\0';
-		while (index-- > 0)
-		{
-			rx(stack, op);
-		}
-	}
-	else
-	{
-		index = size - index;
-		op[1] = 'r';
-		op[2] = stack_char;
-		op[3] = '\0';
-		while (index-- > 0)
-		{
-			rrx(stack, op);
-		}
-	}
+    double x = n;
+    double guess = n / 2.0; // Initial guess
+
+    while (x - guess > 0.00001 || guess - x > 0.00001) { // Precision check
+        x = guess;
+        guess = (x + (n / x)) / 2.0;
+    }
+
+    return guess;
 }
 
-int	get_closest_min_index(t_node *current, int min)
+
+
+int get_closest_min_index(t_node *current, int min)
 {
-	int	i;
+	int i;
 
 	i = 0;
 	while (current)
@@ -43,89 +34,12 @@ int	get_closest_min_index(t_node *current, int min)
 	return (i);
 }
 
-/* void push_closest_min(t_node *stack, int min)
+static void push_to_a(t_node **stack_a, t_node **stack_b)
 {
-	int index;
-
-	index = get_closest_min_index(stack, min);
-} */
-
-
-int get_index(t_node *current, int n)
-{
-	int index = 0;
-
-    while (current)
-    {
-        if (current->value == n)
-            return (index);
-        current = current->next;
-		index++;
-    }
-
-	return index;
-}
-
-int get_max(t_node *stack){
-	int max = stack->value;
-    t_node *current = stack;
-
-    while (current)
-    {
-        if (current->value > max)
-            max = current->value;
-        current = current->next;
-    }
-	return (max);
-}
-
-int	get_next_max(t_node *current, int max)
-{
-	int	next_max;
-
-	next_max = INT_MIN;
-	while (current)
-	{
-		if (current->value < max && current->value > next_max)
-			next_max = current->value;
-		current = current->next;
-	}
-	return (next_max);
-}
-
-int get_min(t_node *stack){
-	int min = stack->value;
-    t_node *current = stack;
-
-    while (current)
-    {
-        if (current->value < min)
-            min = current->value;
-        current = current->next;
-    }
-	return (min);
-}
-
-int	get_next_min(t_node *current, int min)
-{
-	int	next_min;
-
-	next_min = INT_MAX;
-	while (current)
-	{
-		if (current->value > min && current->value < next_min)
-			next_min = current->value;
-		current = current->next;
-	}
-	return (next_min);
-}
-
-static void	push_to_a(t_node **stack_a, t_node **stack_b)
-{
-	int	first;
-	int	second;
-	int	first_index;
-	int	second_index;
+	int first;
+	int second;
+	int first_index;
+	int second_index;
 	int first_moves_required;
 	int second_moves_required;
 	int size = stack_size(*stack_b);
@@ -143,7 +57,7 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 		// printf("second index is: %d\n", second_index);
 		first_moves_required = first_index;
 		second_moves_required = second_index;
-		//printf("size / 2 %d\n", size/2);
+		// printf("size / 2 %d\n", size/2);
 		if (first_index > size / 2)
 			first_moves_required = size - first_index;
 		if (second_moves_required > size / 2)
@@ -163,7 +77,8 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
 				sx(stack_a, "sa");
-			}			second_index = get_index(*stack_b, second);
+			}
+			second_index = get_index(*stack_b, second);
 			// print_stack(*stack_a);
 			move_to_top(stack_b, second_index, size, 'b');
 			px(stack_a, stack_b, "pa");
@@ -173,7 +88,8 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
 				sx(stack_a, "sa");
-			}		}
+			}
+		}
 		else
 		{
 			// printf("moving second...\n");
@@ -191,7 +107,7 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 			// print_stack(*stack_a);
 			move_to_top(stack_b, first_index, size, 'b');
 			// print_stack(*stack_a);
-			
+
 			px(stack_a, stack_b, "pa");
 			size--;
 			// print_stack(stack_a);
@@ -200,63 +116,89 @@ static void	push_to_a(t_node **stack_a, t_node **stack_b)
 			{
 				// printf("head value: %d - next value: %d\n", (*stack_a)->value, (*stack_a)->next->value);
 				sx(stack_a, "sa");
-			}		
+			}
 		}
-
 	}
 }
 
-
-void	chunk_sort(t_node **stack_a, t_node **stack_b)
+void chunk_sort(t_node **stack_a, t_node **stack_b)
 {
-	(void) stack_b;
+	(void)stack_b;
 	// int	index;
-	int	min_int;
-	int	times;
+	int min_int;
+	int times;
 	int size = stack_size(*stack_a);
 	int chunk_size;
-	chunk_size = 50;
-	if(size <= 120){
-		chunk_size=18;
+	int middle;
+	// chunk_size = 50;
+	// if(size <= 120){
+	// 	chunk_size=18;
+	// }
+
+	int original_size = size;
+	t_node *stack_c;
+
+	duplicate_stack(&stack_c, *stack_a);
+	// clone stack a into stack c
+
+	// while chunk size is less than the size of the stack
+	// reset / empty stack a
+	// fill it with stack c elements
+	// sort it.
+	chunk_size = original_size / sqrt_manual(original_size);
+	if(original_size < 20){
+		chunk_size = 3;
 	}
+	else if (original_size < 120)
+		chunk_size = 19;
+	else
+		chunk_size = 52;
+	
 
-	//clone stack a into stack c
 
-	//while chunk size is less than the size of the stack
-	//reset / empty stack a
-	//fill it with stack c elements
-	//sort it.
-
-	while (*stack_a)
+	while (chunk_size < original_size)
 	{
-		if(chunk_size > size)
-			chunk_size = size;
-		times = 0;
-		min_int = get_min(*stack_a);
-		//printf("min int: %d\n", min_int);
-		while (*stack_a && times++ < chunk_size)
-		{
-			min_int = get_next_min(*stack_a, min_int);
-			//  printf("next min int: %d\n", min_int);
-			// if (times == chunk_size / 2)
-			// 	stack_a->middle = min_int;
-		}
+		free_stack(*stack_a);
+		free_stack(*stack_b);
+		duplicate_stack(stack_a, stack_c);
 
+		size = original_size;
 
-		times = 0;
-		while (*stack_a && times++ < chunk_size)
+		while (*stack_a /* && size > 3 */)
 		{
-			// print_stack(*stack_a);
-			int index = get_closest_min_index(*stack_a, min_int);
-			// printf("MIN INT: %d - INDEX: %d\n", min_int, index);
-			if (index > size / 2)
-				index = size - index;
-			move_to_top(stack_a, index, size, 'a');
-			px(stack_b, stack_a, "pb");
-			size--;
-			// if (stack_b->stack[0] < stack_a->middle)
-			// 	ft_do_rotate(stack_b, 'b');
+			times = 0;
+			min_int = get_min(*stack_a);
+			// printf("min int: %d\n", min_int);
+			while (*stack_a && times++ < chunk_size)
+			{
+				min_int = get_next_min(*stack_a, min_int);
+				//  printf("next min int: %d\n", min_int);
+				if (times == chunk_size / 2)
+					middle = min_int;
+			}
+
+			times = 0;
+			while (*stack_a /* && size > 3 */ && times++ < chunk_size)
+			{
+				// print_stack(*stack_a);
+				int index = get_closest_min_index(*stack_a, min_int);
+				// printf("MIN INT: %d - INDEX: %d\n", min_int, index);
+				if (index > size / 2)
+					index = size - index;
+				move_to_top(stack_a, index, size, 'a');
+				px(stack_b, stack_a, "pb");
+				size--;
+				if((*stack_b)->value < middle)
+					rx(stack_b, "rb");
+				// if (stack_b->stack[0] < stack_a->middle)
+				// 	ft_do_rotate(stack_b, 'b');
+			}
 		}
+		//sort_three(stack_a);
+		//printf("chunk size: %d\n", chunk_size);
+		push_to_a(stack_a, stack_b);
+		chunk_size = original_size;
+		add_operation("end");
 	}
-	push_to_a(stack_a, stack_b);
+	add_operation("print");
 }

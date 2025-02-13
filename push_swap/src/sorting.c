@@ -1,36 +1,17 @@
 #include "../push_swap.h"
 #include <stdio.h>
 
-int stack_size(t_node *current)
-{
-    int size = 0;
-    while (current)
-    {
-        size++;
-        current = current->next;
-    }
-    return size;
-}
-
 int check_sorted(t_node *current)
 {
 	while (current->next)
 	{
-		// printf("current value: %d\n", current->value);
 		if (current->value > current->next->value)
 			return 0;
 		current = current->next;
 	}
-	// printf("is sorted\n");
 	return 1;
 }
 
-
-
-#include "../push_swap.h"
-#include <stdio.h>
-
-// Sort a stack of size 3 with fewer moves
 void sort_three(t_node **a)
 {
     int num1 = (*a)->value;
@@ -45,15 +26,9 @@ void sort_three(t_node **a)
     }
     // Case 2: 3 1 2 (needs rotation)
     else if (num1 > num3 && num3 > num2)
-    {
         rx(a, "ra");  // Rotate: 1 2 3
-    }
-    // Case 3: 2 3 1 (needs swap and rotate)
     else if (num2 > num1 && num1 > num3)
-    {
         rrx(a, "rra");  // Swap top two: 3 2 1
-    }
-    // Case 4: 1 3 2 (needs swap and rotate)
      else if (num2 > num3 && num3 > num1)
     {
         rrx(a, "rra");
@@ -61,13 +36,26 @@ void sort_three(t_node **a)
     }
     // Case 5: 2 1 3 
       else if (num3 > num1 && num1 > num2)
-    {
 		sx(a, "sa");
-    }
     // Case 4: 1 3 2 (already sorted, no action needed)
     // No action needed as the stack is already sorted in ascending order.
 }
 
+	void simple_sort(t_node **a, t_node **b)
+	{
+		int size = stack_size(*a);
+		while (stack_size(*a) > 3)
+		{
+			int min = get_min(*a);
+			int index = get_index(*a, min);
+			move_to_top(a, index, size, 'a');
+			px(b, a, "pb");
+			size--;
+		}
+		sort_three(a);
+		while (*b)
+			px(a, b, "pa");
+	}
 
 
 
@@ -77,28 +65,26 @@ void sort_stack(t_node **a, t_node **b)
 {
     int size = stack_size(*a);
 
-	/* printf("\nStack A: \n");
-	print_stack(*a);
-	printf("\nStack B: \n");
-	print_stack(*b);
-	printf("\n"); */
-
-	if(check_sorted(*a) == 1){
-		printf("is sorted\n");
+	if(check_sorted(*a) == 1)
 		return ;
-	}
 
 	if(size == 2){
 		sx(a, "sa");
-		return ;
+		add_operation("end");
+		return add_operation("print");
 	}
 
 	if(size == 3){
 		sort_three(a);
-		return ;
+		add_operation("end");
+		return add_operation("print");
+	}
+
+	if(size < 6){
+		simple_sort(a, b);
+		add_operation("end");
+		return add_operation("print");
 	}
 
 	chunk_sort(a,b);
-	
-
 }

@@ -9,18 +9,12 @@ int main(int argc, char **argv)
 
     if (argc < 2)
         return (1);
-    //printf("%s\n", argv[2]);
-
-    //cleanup argv
-
-    //during cleaning, put it inside stack a
 
     a = init_stack(argc, argv);
     if (!a)
     {
 		free_stack(a);
         ft_putstr_fd("Error\n", 2);
-        //printf("error");
         return (1);
     }
 
