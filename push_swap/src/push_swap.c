@@ -38,7 +38,7 @@ void	sort_stack(t_node **a, t_node **b)
 		operations_handler("end");
 		return (operations_handler("print"));
 	}
-	chunk_sort(a, b);
+	bucket_sort(a, b);
 }
 
 int	main(int argc, char **argv)
