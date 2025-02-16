@@ -10,3 +10,6 @@ push_swap/push_swap
 push_swap/push_swap_test*
 push_swap/traces.txt
 .vscode
+checker_linux
+push_swap/0
+push_swap/checker_linux
