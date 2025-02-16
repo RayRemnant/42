@@ -10,8 +10,8 @@ LIBFT = $(LIBFT_DIR)/libft.a
 SRC_OPERATIONS = src/operations/operations_handler.c src/operations/push.c src/operations/swap.c src/operations/rotate.c src/operations/reverse_rotate.c 
 SRC_STACK = src/stack/stack_utils.c src/stack/stack_check.c src/stack/neo_libft.c
 SRC_SORT = src/sort/get.c src/sort/move.c src/sort/sort.c
-SRC_BUCKET_SORT = src/sort/bucket_get.c src/sort/bucket_push.c src/sort/bucket_sort.c
-SRC = $(SRC_OPERATIONS) $(SRC_STACK) $(SRC_SORT) $(SRC_BUCKET_SORT) src/push_swap.c 
+SRC_QUICKSORT = src/sort/quicksort_get.c src/sort/quicksort_push.c src/sort/quicksort.c
+SRC = $(SRC_OPERATIONS) $(SRC_STACK) $(SRC_SORT) $(SRC_QUICKSORT) src/push_swap.c 
 OBJ = $(SRC:.c=.o)
 NAME = push_swap
 

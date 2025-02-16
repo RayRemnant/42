@@ -59,11 +59,11 @@ int					get_next_min(t_node *current, int min);
 void				sort_simple(t_node **a, t_node **b);
 int					free_tokens(char **tokens);
 
-// bucket sort
-void				bucket_sort(t_node **a, t_node **b);
+// quicksort
+void				quicksort(t_node **a, t_node **b);
 void				push_to_a(t_node **stack_a, t_node **stack_b);
 void				push_to_b(t_node **stack_a, t_node **stack_b,
-						int bucket_size);
+						int quicksort_size);
 int					get_closest_min_index(t_node *current, int min);
 int					get_moves_required(t_node **stack_b, int number, int size);
 

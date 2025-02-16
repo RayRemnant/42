@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../push_swap.h"
-#include "stdio.h"
 
 void	sort_stack(t_node **a, t_node **b)
 {
@@ -38,7 +37,7 @@ void	sort_stack(t_node **a, t_node **b)
 		operations_handler("end");
 		return (operations_handler("print"));
 	}
-	bucket_sort(a, b);
+	quicksort(a, b);
 }
 
 int	main(int argc, char **argv)

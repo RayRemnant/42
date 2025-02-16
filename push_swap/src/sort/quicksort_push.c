@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bucket_push.c                                      :+:      :+:    :+:   */
+/*   quicksort_push.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddragos <ddragos@student.42roma.it>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 20:52:25 by ddragos           #+#    #+#             */
-/*   Updated: 2025/02/13 20:52:26 by ddragos          ###   ########.fr       */
+/*   Created: 2025/02/16 18:52:49 by ddragos           #+#    #+#             */
+/*   Updated: 2025/02/16 18:52:50 by ddragos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../push_swap.h"
 
-static void	push_min_to_b(t_node **stack_a, t_node **stack_b, int bucket_size,
-		int min)
+static void	push_min_to_b(t_node **stack_a, t_node **stack_b,
+		int quicksort_size, int min)
 {
 	int	times;
 	int	index;
@@ -22,14 +22,14 @@ static void	push_min_to_b(t_node **stack_a, t_node **stack_b, int bucket_size,
 
 	size = stack_size(*stack_a);
 	times = 0;
-	while (*stack_a && times++ < bucket_size)
+	while (*stack_a && times++ < quicksort_size)
 	{
 		min = get_next_min(*stack_a, min);
-		if (times == bucket_size / 2)
+		if (times == quicksort_size / 2)
 			middle = min;
 	}
 	times = 0;
-	while (*stack_a && times++ < bucket_size)
+	while (*stack_a && times++ < quicksort_size)
 	{
 		index = get_closest_min_index(*stack_a, min);
 		if (index > size / 2)
@@ -42,13 +42,13 @@ static void	push_min_to_b(t_node **stack_a, t_node **stack_b, int bucket_size,
 	}
 }
 
-void	push_to_b(t_node **stack_a, t_node **stack_b, int bucket_size)
+void	push_to_b(t_node **stack_a, t_node **stack_b, int quicksort_size)
 {
 	int	min;
 
 	min = get_min(*stack_a);
 	while (*stack_a)
-		push_min_to_b(stack_a, stack_b, bucket_size, min);
+		push_min_to_b(stack_a, stack_b, quicksort_size, min);
 }
 
 static void	push_max_to_a(t_node **stack_a, t_node **stack_b, int index,
